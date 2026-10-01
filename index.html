@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas Alfa 2026 - Multimedia y Juegos en Web</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #121214;
+      --bg-card: #1e1e24;
+      --bg-card-hover: #292932;
+      --accent-color: #6c5ce7;
+      --accent-hover: #5a4bcf;
+      --test-btn-bg: #2ed573;
+      --test-btn-hover: #26af5f;
+      --text-main: #f1f2f6;
+      --text-muted: #a4b0be;
+      --border-color: #2f3542;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(180deg, rgba(20, 20, 26, 0.95) 0%, rgba(18, 18, 20, 0.8) 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.2rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .logo-uner {
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .titles h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .titles h2 {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--accent-color);
+    }
+
+    /* BUSCADOR */
+    .search-box {
+      position: relative;
+      min-width: 280px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background-color: #1a1a20;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .intro-banner {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(108, 92, 231, 0.1);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 4px;
+    }
+
+    .intro-banner p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* GRID DE JUEGOS */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      border-color: var(--accent-color);
+      background-color: var(--bg-card-hover);
+    }
+
+    .card-media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #121214;
+      overflow: hidden;
+    }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .game-card:hover .card-media img {
+      transform: scale(1.05);
+    }
+
+    .badge-group {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(18, 18, 20, 0.85);
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .members-list {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+
+    .members-list i {
+      margin-right: 0.4rem;
+      color: var(--accent-color);
+    }
+
+    /* BOTONES DE ACCIÓN */
+    .card-footer {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .btn-itch, .btn-test {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.65rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-itch {
+      background-color: var(--accent-color);
+    }
+
+    .btn-itch:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-test {
+      background-color: var(--test-btn-bg);
+    }
+
+    .btn-test:hover {
+      background-color: var(--test-btn-hover);
+    }
+
+    /* MODAL DE GAME TEST */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      width: 90%;
+      max-width: 550px;
+      padding: 1.8rem;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.8rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .close-modal:hover {
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background-color: #121214;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent-color);
+    }
+
+    /* ESTRELLAS DE VALORACIÓN */
+    .rating-stars {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 1.4rem;
+      color: #eccc68;
+      cursor: pointer;
+    }
+
+    .rating-stars i:hover ~ i {
+      color: #57606f;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 600px) {
+      .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / ENCABEZADO -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <!-- Logo UNER Facultad de Ciencias de la Administración -->
+        <img src="logo uner2.png" alt="UNER - Facultad de Ciencias de la Administración" class="logo-uner">
+        <div class="titles">
+          <h1>Pruebas Alfa 2026</h1>
+          <h2>Asignatura Multimedia y Juegos en Web</h2>
+        </div>
+      </div>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" onkeyup="filterGames()" placeholder="Buscar por grupo, juego o integrante...">
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <div class="intro-banner">
+      <p>Catálogo de prototipos y entregas en fase Pre-Alfa / Alfa desarrollados por los estudiantes de la asignatura. Explora, prueba los proyectos en itch.io y completa el formulario de Game Test para enviar retroalimentación a los creadores.</p>
+    </div>
+
+    <div class="games-grid" id="gamesContainer">
+
+      <!-- Grupo 1 -->
+      <article class="game-card">
+        <div class="card-media">
+          <span class="badge-group">Grupo 1</span>
+          <img src="https://img.itch.zone/aW1nLzMwMzg2MDY1LnBuZw==/original/bVkkbl.png" alt="El Cantar de Jimena" loading="lazy" onerror="this.src='https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Sin+Imagen';">
+        </div>
+        <div class="card-body">
+          <h3 class="game-title">El Cantar de Jimena</h3>
+          <p class="members-list"><i class="fa-solid fa-users"></i> María Jimena Fernández</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://fernanbits.itch.io/el-cantar-de-jimena" target="_blank" class="btn-itch"><i class="fa-brands fa-itch-io"></i> Ver en itch.io</a>
+          <button class="btn-test" onclick="openTestModal('Grupo 1 - El Cantar de Jimena')"><i class="fa-solid fa-gamepad"></i> Realizar Game Test</button>
+        </div>
+      </article>
+
+      <!-- Grupo 2 -->
+      <article class="game-card">
+        <div class="card-media">
+          <span class="badge-group">Grupo 2</span>
+          <img src="https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Echoes+of+the+Blind" alt="Echoes of the Blind" loading="lazy" onerror="this.src='https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Sin+Imagen';">
+        </div>
+        <div class="card-body">
+          <h3 class="game-title">Echoes of the Blind</h3>
+          <p class="members-list"><i class="fa-solid fa-users"></i> Luis Gutiérrez, Natalia Pellegrineschi, Vanesa Rimada, Elian Perez, Valeria Travnik, Ariel Aragón</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://grupo2-uner.itch.io/echoes-of-the-blind" target="_blank" class="btn-itch"><i class="fa-brands fa-itch-io"></i> Ver en itch.io</a>
+          <button class="btn-test" onclick="openTestModal('Grupo 2 - Echoes of the Blind')"><i class="fa-solid fa-gamepad"></i> Realizar Game Test</button>
+        </div>
+      </article>
+
+      <!-- Grupo 21 -->
+      <article class="game-card">
+        <div class="card-media">
+          <span class="badge-group">Grupo 21</span>
+          <img src="https://img.itch.zone/aW1nLzE2OTkwMDIxLnBuZw==/315x250%23c/K9sXzL.png" alt="Kuarahy" loading="lazy" onerror="this.src='https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Sin+Imagen';">
+        </div>
+        <div class="card-body">
+          <h3 class="game-title">Kuarahy</h3>
+          <p class="members-list"><i class="fa-solid fa-users"></i> Cáceres Iván, Roth Mauro, Spinnenhirn Soledad</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://grupo21-tudw.itch.io/kuarahy" target="_blank" class="btn-itch"><i class="fa-brands fa-itch-io"></i> Ver en itch.io</a>
+          <button class="btn-test" onclick="openTestModal('Grupo 21 - Kuarahy')"><i class="fa-solid fa-gamepad"></i> Realizar Game Test</button>
+        </div>
+      </article>
+
+      <!-- Grupo 120 -->
+      <article class="game-card">
+        <div class="card-media">
+          <span class="badge-group">Grupo 120</span>
+          <img src="https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Angelo" alt="Angelo" loading="lazy" onerror="this.src='https://via.placeholder.com/630x354/1e1e24/a4b0be?text=Sin+Imagen';">
+        </div>
+        <div class="card-body">
+          <h3 class="game-title">Angelo</h3>
+          <p class="members-list"><i class="fa-solid fa-users"></i> María Carla Aquino, Franco Matías Aquino, Gastón Emmanuel Díaz</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://marcarlabr.itch.io/angelo" target="_blank" class="btn-itch"><i class="fa-brands fa-itch-io"></i> Ver en itch.io</a>
+          <button class="btn-test" onclick="openTestModal('Grupo 120 - Angelo')"><i class="fa-solid fa-gamepad"></i> Realizar Game Test</button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE GAME TEST -->
+  <div class="modal-overlay" id="testModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalProjectTitle">Game Test: Proyecto</h3>
+        <button class="close-modal" onclick="closeTestModal()">&times;</button>
+      </div>
+      <form id="gameTestForm" onsubmit="submitGameTest(event)">
+        <input type="hidden" id="projectNameInput">
+        
+        <div class="form-group">
+          <label for="testerName">Nombre del Tester / Estudiante:</label>
+          <input type="text" id="testerName" required placeholder="Tu nombre y apellido">
+        </div>
+
+        <div class="form-group">
+          <label>Puntuación de Jugabilidad (Gameplay):</label>
+          <select id="gameplayRating" required>
+            <option value="">Seleccionar valoración...</option>
+            <option value="5">⭐⭐⭐⭐⭐ Excelente control y mecánicas</option>
+            <option value="4">⭐⭐⭐⭐ Bueno, pequeños detalles a pulir</option>
+            <option value="3">⭐⭐⭐ Aceptable, requiere ajustes de balance</option>
+            <option value="2">⭐⭐ Dificultades con el control</option>
+            <option value="1">⭐ Injugable o confuso</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="difficulty">Percepción de Dificultad:</label>
+          <select id="difficulty" required>
+            <option value="Adecuada">Adecuada / Balanceada</option>
+            <option value="Muy Fácil">Muy Fácil</option>
+            <option value="Muy Difícil">Muy Difícil / Frustrante</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bugReport">Bugs o Errores encontrados:</label>
+          <textarea id="bugReport" rows="3" placeholder="Describe los errores, glitches o problemas técnicos observados..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback">Comentarios y Sugerencias de mejora:</label>
+          <textarea id="feedback" rows="3" required placeholder="¿Qué te gustó más? ¿Qué agregarías o cambiarías?"></textarea>
+        </div>
+
+        <button type="submit" class="btn-test"><i class="fa-solid fa-paper-plane"></i> Enviar Feedback</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <p>Pruebas Alfa 2026 &copy; - Universidad Nacional de Entre Ríos (UNER)</p>
+    <p>Asignatura: Multimedia y Juegos en Web</p>
+    <button class="btn-export" onclick="exportToJSON()">
+    <i class="fa-solid fa-file-arrow-down"></i> Descargar Registro JSON
+</button>
+  </footer>
+
+  <!-- LÓGICA JAVASCRIPT -->
+  <script>
+    // Filtro de búsqueda
+    function filterGames() {
+      const input = document.getElementById('searchInput');
+      const filter = input.value.toLowerCase();
+      const grid = document.getElementById('gamesContainer');
+      const cards = grid.getElementsByClassName('game-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        const title = cards[i].querySelector('.game-title').textContent.toLowerCase();
+        const members = cards[i].querySelector('.members-list').textContent.toLowerCase();
+        const group = cards[i].querySelector('.badge-group').textContent.toLowerCase();
+
+        if (title.includes(filter) || members.includes(filter) || group.includes(filter)) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+
+    // Modal Control
+    function openTestModal(projectName) {
+      document.getElementById('modalProjectTitle').innerText = "Game Test: " + projectName;
+      document.getElementById('projectNameInput').value = projectName;
+      document.getElementById('testModal').classList.add('active');
+    }
+
+    function closeTestModal() {
+      document.getElementById('testModal').classList.remove('active');
+      document.getElementById('gameTestForm').reset();
+    }
+
+// Guardar evaluación y descargar archivo JSON individual o acumulado
+function submitGameTest(event) {
+  event.preventDefault();
+
+  const testData = {
+    id: "TEST-" + Date.now(),
+    project: document.getElementById('projectNameInput').value,
+    tester: document.getElementById('testerName').value,
+    rating: document.getElementById('gameplayRating').value,
+    difficulty: document.getElementById('difficulty').value,
+    bugs: document.getElementById('bugReport').value,
+    feedback: document.getElementById('feedback').value,
+    timestamp: new Date().toISOString()
+  };
+
+  // 1. Guardar en registro histórico local
+  let existingTests = JSON.parse(localStorage.getItem('uner_game_tests')) || [];
+  existingTests.push(testData);
+  localStorage.setItem('uner_game_tests', JSON.stringify(existingTests));
+
+  // 2. Descargar automáticamente el JSON de esta evaluación individual
+  downloadJSONFile(testData, `gametest_${testData.project.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.json`);
+
+  alert(`¡Gracias ${testData.tester}! El Game Test se ha registrado y descargado en formato JSON.`);
+  closeTestModal();
+}
+
+// Función auxiliar para forzar la descarga del archivo .json en el navegador
+function downloadJSONFile(dataObj, filename) {
+  const jsonStr = JSON.stringify(dataObj, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Función para descargar TODAS las evaluaciones acumuladas en un solo fichero JSON
+function exportToJSON() {
+  const allTests = JSON.parse(localStorage.getItem('uner_game_tests')) || [];
+  if (allTests.length === 0) {
+    alert("Aún no hay evaluaciones registradas para exportar.");
+    return;
+  }
+  downloadJSONFile(allTests, 'reporte_game_tests_uner.json');
+}
+  </script>
+</body>
+</html>
